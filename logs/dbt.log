@@ -1,0 +1,36 @@
+
+
+============================== 2022-09-16 13:33:54.311727 | 93e855a1-2301-4595-9fed-404cf7730cbe ==============================
+13:33:54.311727 [info ] [MainThread]: Running with dbt=1.1.0
+13:33:54.312748 [debug] [MainThread]: running dbt with arguments {'write_json': True, 'use_colors': True, 'printer_width': 80, 'version_check': True, 'partial_parse': True, 'static_parser': True, 'profiles_dir': 'C:\\Users\\victor.bertoldo\\.dbt', 'send_anonymous_usage_stats': True, 'event_buffer_size': 100000, 'quiet': False, 'no_print': False, 'project_name': 'dbt_datavault', 'skip_profile_setup': False, 'which': 'init', 'indirect_selection': 'eager'}
+13:33:54.312748 [debug] [MainThread]: Tracking: tracking
+13:33:54.312748 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'start', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x0000022833F914C0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x0000022833F91310>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x0000022833F91430>]}
+13:33:54.316774 [debug] [MainThread]: Starter project path: c:\users\victor.bertoldo\anaconda3\lib\site-packages\dbt\include\starter_project
+13:58:24.045546 [info ] [MainThread]: Profile dbt_datavault written to C:\Users\victor.bertoldo\.dbt\profiles.yml using target's profile_template.yml and your supplied values. Run 'dbt debug' to validate the connection.
+13:58:24.046562 [info ] [MainThread]: 
+Your new dbt project "dbt_datavault" was created!
+
+For more information on how to configure the profiles.yml file,
+please consult the dbt documentation here:
+
+  https://docs.getdbt.com/docs/configure-your-profile
+
+One more thing:
+
+Need help? Don't hesitate to reach out to us via GitHub issues or on Slack:
+
+  https://community.getdbt.com/
+
+Happy modeling!
+
+13:58:24.047545 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'end', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x0000022837297190>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x00000228372970D0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x0000022837297220>]}
+
+
+============================== 2022-09-16 14:06:07.777301 | 1ab57c55-945a-4365-98c2-481ec1a5ce8d ==============================
+[0m14:06:07.777301 [info ] [MainThread]: Running with dbt=1.2.1
+[0m14:06:07.778308 [debug] [MainThread]: running dbt with arguments {'write_json': True, 'use_colors': True, 'printer_width': 80, 'version_check': True, 'partial_parse': True, 'static_parser': True, 'profiles_dir': 'C:\\Users\\victor.bertoldo\\.dbt', 'send_anonymous_usage_stats': True, 'event_buffer_size': 100000, 'quiet': False, 'no_print': False, 'project_name': 'dbt_datavault', 'skip_profile_setup': False, 'which': 'init', 'indirect_selection': 'eager'}
+[0m14:06:07.778308 [debug] [MainThread]: Tracking: tracking
+[0m14:06:07.779266 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'start', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001D65451CE80>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001D65451CD60>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001D65451CCA0>]}
+[0m14:06:07.780266 [debug] [MainThread]: Starter project path: D:\Projetos\Pessoais\learning_datavault\.venv\lib\site-packages\dbt\include\starter_project
+[0m14:06:26.859088 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'end', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001D654511B20>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001D654511CA0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001D654511AC0>]}
+[0m14:06:26.860571 [debug] [MainThread]: Flushing usage events
