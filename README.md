@@ -55,4 +55,42 @@ dbt deps
 
 Note que agora seu projeto possui uma pasta chamada `dbt_packages` e dentro dela está a lib.
 
+Agora que temos tudo instalado, temos que configurar algumas coisas no nosso projeto.
 
+### Configurando **``dbt_project.yml``**
+
+Adicionando variaveis ao arquivo:
+
+``` yml
+vars:
+  load_date: '1992-01-08'
+  tpch_size: 10 #1, 10, 100, 1000, 10000
+```
+
+### Configurando **``sources.yml``**
+
+``` yml
+version: 2
+
+sources:
+  - name: tpch_sample
+    database: SNOWFLAKE_SAMPLE_DATA
+    schema: TPCH_SF{{ var('tpch_size', 10) }}
+    tables:
+      - name: LINEITEM
+      - name: CUSTOMER
+      - name: ORDERS
+      - name: PARTSUPP
+      - name: SUPPLIER
+      - name: PART
+      - name: NATION
+      - name: REGION
+```
+
+### Arquitetura do projeto
+
+```mermaid
+flowchart TD
+    A[Raw Staging Layer]-->B;
+    B[Hashed Staging Layer];
+```    

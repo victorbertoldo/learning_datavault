@@ -1,17 +1,10 @@
-
-# Name your project! Project names should contain only lowercase characters
-# and underscores. A good package name should reflect your organization's
-# name or the intended use of these models
 name: 'dbt_datavault'
-version: '1.0.0'
+version: '5.0.0'
+# require-dbt-version: ['>=0.18.0', '<0.19.0']
 config-version: 2
 
-# This setting configures which "profile" dbt uses for this project.
 profile: 'dbt_datavault'
 
-# These configurations specify where dbt should look for different types of files.
-# The `model-paths` config, for example, states that models in this project can be
-# found in the "models/" directory. You probably won't need to change these!
 model-paths: ["models"]
 analysis-paths: ["analyses"]
 test-paths: ["tests"]
@@ -24,15 +17,14 @@ clean-targets:         # directories to be removed by `dbt clean`
   - "target"
   - "dbt_packages"
 
+vars:
+  load_date: '1992-01-08'
+  tpch_size: 10 #1, 10, 100, 1000, 10000
 
-# Configuring models
-# Full documentation: https://docs.getdbt.com/docs/configuring-models
 
-# In this example config, we tell dbt to build all models in the example/ directory
-# as tables. These settings can be overridden in the individual model files
-# using the `{{ config(...) }}` macro.
 models:
   dbt_datavault:
-    # Config indicated by + and applies to all files under models/example/
-    example:
+    raw_stage:
+      tags:
+        - 'raw'
       +materialized: view
