@@ -115,3 +115,35 @@ models
       -- v_stg_orders.sql
 
 ```
+Para iniciarmos a construção da `Hashed Staging Layer`, vamos começar criando o arquivo citado acima `v_stg_orders.sql`, e vamos adicionar algumas variáveis:
+
+``` sql
+{{ 
+    config(
+    materialized='view'
+    )
+}}
+
+{% set yaml_metadata %}
+source_model: raw_orders
+{% endset %}
+
+{% set metadata_dict = fromyaml(yaml_metadata) %}
+
+{% set source_model = metadata_dict['source_model'] %}
+
+{{ dbtvault.stage(
+                include_source_columns=true,
+                source_model=source_model,
+                derived_columns=derived_columns,
+                hashed_columns=hashed_columns)
+                }}
+
+```
+
+> Aqui nesse exemplo estamos criando uma variavel em formato de yml, apenas com 1 chave-valor, que apenas referenciar a tabela da `Raw Stage`. Depois usamos uma função para transformar o yml em dicionário e passamos o valor para a variavel reservada do **``dbtvault``** (source_model). E no final estamos utilizando a macro stage do **``dbtvault``**. Note que no exemplo acima ainda não criamos as variaveis: ``derived_columns`` e ``hashed_columns``.
+
+Até aqui, da forma que construimos ao rodar o script, o arquivo `v_stg_orders.sql` vai gerar uma view igual à `raw_orders.sql`.
+
+**É importante notar isso, pois a partir daqui começamos a adicionar caracteristicas do Data Vault em nosso modelo.**
+
