@@ -92,7 +92,7 @@ sources:
 ```mermaid
 flowchart TD
     A[Raw Staging Layer]-->B;
-    B[Hashed Staging Layer]-->C;
-    C[Raw Data (dados existentes)];
-   
+    B[Hashed Staging Layer]-->C[Raw Data (dados existentes)];
+    B[Hashed Staging Layer]-->D[Hashes (Adição de colunas - Metadados)];
+    B[Hashed Staging Layer]-->E[Constants (Adição de colunas - Metadados)];
 ```    
