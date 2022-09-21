@@ -87,10 +87,15 @@ sources:
       - name: REGION
 ```
 
-### Arquitetura do projeto
+### Arquitetura da camada stage
 
 ```mermaid
 flowchart TD
     A[Raw Staging Layer]-->B;
-    B[Hashed Staging Layer];
+    B[Hashed Staging Layer]-->C;
+    B[Hashed Staging Layer]-->D;
+    B[Hashed Staging Layer]-->E;
+    C[Raw Data (dados existentes)];
+    D[Hashes (Adição de colunas - Metadados)];
+    E[Constants (Adição de colunas - Metadados)];
 ```    
