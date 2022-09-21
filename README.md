@@ -147,3 +147,27 @@ Até aqui, da forma que construimos ao rodar o script, o arquivo `v_stg_orders.s
 
 **É importante notar isso, pois a partir daqui começamos a adicionar caracteristicas do Data Vault em nosso modelo.**
 
+Para que nossa `Prime Stage` seja construida da melhor forma iremos adicionar o parametro `derived_columns` no modelo:
+
+``` sql
+...
+{% set yaml_metadata %}
+source_model: raw_orders
+derived_columns:
+    RECORD_SOURCE: "!TPCH-ORDERS"
+    LOAD_DATE: DATEADD(DAY, 30, ORDERDATE)
+    EFFECTIVE_FROM: ORDERDATE
+{% endset %}
+...
+```
+> - Note que o valor referente ao ``record_source`` possui um "!" no inicio. Esta é uma funcionalidade do dbtvault que diz ao modelo que o valor declarado é uma constante a ser atribuida para todas as linhas do modelo.
+> - Como para este dataset não temos um campo de quando o dado foi carregado, estamos simulando que o `load_date` corresponde à 30 dias após a realização do pedido.
+> - O parametro `EFFECTIVE_FROM` é utilizado para gerar a data de inicio (``src_start_date``) de um registro de `Effectivity Satellites`.
+
+Após adicionar as colunas derivadas ao yml, não se esqueça de extrair esta informação para a que a variavel `derived_columns` da macro stage extraia as informações para adicionar ao modelo.
+
+``` sql
+{% set derived_columns = metadata_dict['derived_columns'] %}
+```
+
+Seguindo estes passos, o nosso modelo irá gerar as colunas derivadas em nossa `Prime Stage`.
