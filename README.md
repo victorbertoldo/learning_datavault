@@ -93,9 +93,9 @@ sources:
 flowchart TD
     A[Raw Staging Layer]-->B;
     B[Hashed Staging Layer]-->C;
-    B[Hashed Staging Layer]-->D;
-    B[Hashed Staging Layer]-->E;
     C[Raw Data (dados existentes)];
+    B[Hashed Staging Layer]-->D;
     D[Hashes (Adição de colunas - Metadados)];
+    B[Hashed Staging Layer]-->E;
     E[Constants (Adição de colunas - Metadados)];
 ```    
