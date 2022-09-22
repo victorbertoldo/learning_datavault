@@ -171,3 +171,35 @@ Após adicionar as colunas derivadas ao yml, não se esqueça de extrair esta in
 ```
 
 Seguindo estes passos, o nosso modelo irá gerar as colunas derivadas em nossa `Prime Stage`.
+
+Agora seguimos para uma das caracteristicas mais importantes do dbtvault que é a geração das chaves com hash. Para isso vamos modificar a nossa variavel yaml, adicionando a sessão de `hashed_columns`:
+
+``` sql
+hashed_columns:
+    CUSTOMER_PK: CUSTOMERKEY
+    ORDER_PK: ORDERKEY
+    ORDER_CUSTOMER_PK:
+        - CUSTOMERKEY
+        - ORDERKEY
+    CUSTOMER_HASHDIFF:
+        is_hashdiff: true
+        columns:
+            - CUSTOMERKEY
+            - CUSTOMER_NAME
+            - CUSTOMER_ADDRESS
+            - CUSTOMER_PHONE
+            - CUSTOMER_ACCBAL
+            - CUSTOMER_MKTSEGMENT
+            - CUSTOMER_COMMENT
+            - EFFECTIVE_FROM
+```
+> Como podemos ver, para gerar o hashdiff é necessário utilizar a chamada `is_hashdiff: true`  e declarar os campos que farão parte desta chave para que nossa `Prime Stage fique completa`.
+
+Não esqueça de declarar a variavel `hashed_columns` logo abaixo:
+
+``` sql
+{% set hashed_columns = metadata_dict['hashed_columns'] %}
+```
+
+Agora, ao rodar o modelo em questão `v_stg_orders.sql`, temos uma tabela com dados brutos, enriquecida com colunas derivadas e hashs, ajudarão na gestão do data vault e na geração dos objetos.
+
