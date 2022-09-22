@@ -203,3 +203,41 @@ Não esqueça de declarar a variavel `hashed_columns` logo abaixo:
 
 Agora, ao rodar o modelo em questão `v_stg_orders.sql`, temos uma tabela com dados brutos, enriquecida com colunas derivadas e hashs, ajudarão na gestão do data vault e na geração dos objetos.
 
+## Iniciando nosso Raw Vault
+Primeiramente criaremos uma pasta chamada raw_vault e ela terá a seguinte estrutura:
+``` shell
+models
+  |
+  -- raw_vault
+     |
+     -- hubs
+     |
+     -- links
+     |
+     -- satellites
+```
+Com a estrutura acima definida, criaremos os objetos em suas respectivas pastas.
+### Hubs
+Vamos criar nosso primeiro Hub, `hub_customer.sql`, apos a criação do arquivo dentro da pasta hub, vamos configurar as variaveis necessarias para obter nosso hub.
+
+Conforme a documentação do **``dbtvault``**, a chamada da macro de geração de hubs, se dá da seguinte maneira:
+
+``` sql
+{{ dbtvault.hub(src_pk=src_pk, src_nk=src_nk, src_ldts=src_ldts,
+                src_source=src_source, source_model=source_model) }}
+```
+
+Para obtermos os valores necessários para tal, vamos iniciar algumas variaveis antes:
+
+``` sql
+{{ config(materialized='incremental') }}
+
+{% set source_model = "v_stg_orders" %}
+{% set src_pk = "CUSTOMER_PK" %}
+{% set src_nk = "CUSTOMERKEY" %}
+{% set src_ldts = "LOAD_DATE" %}
+{% set src_source = "RECORD_SOURCE" %}
+```
+> É importante que o modelo seja definido como incremental e que as variaveis sejam criadas associando cada valor ao dado referente. Não é necessário chamar a tabela para pegar as colunas, definindo o ``source_model``, o dbtvault consegue fazer isso automaticamente.
+
+Logo abaixo do codigo acima, é que chamamos a macro hub para gerar nossa tabela.
