@@ -244,3 +244,28 @@ Para obtermos os valores necessários para tal, vamos iniciar algumas variaveis 
 > É importante que o modelo seja definido como incremental e que as variaveis sejam criadas associando cada valor ao dado referente. Não é necessário chamar a tabela para pegar as colunas, definindo o ``source_model``, o dbtvault consegue fazer isso automaticamente.
 
 Logo abaixo do codigo acima, é que chamamos a macro hub para gerar nossa tabela.
+
+### Links
+
+O codigo de geração dos links é muito similar ao codigo de geração dos ``Hubs``.
+
+Precisamos atender o que é dito na documentação:
+
+``` sql
+{{ dbtvault.link(src_pk=src_pk, src_fk=src_fk, src_ldts=src_ldts,
+                src_source=src_source, source_model=source_model) }}
+```
+Se atente que a principal diferença dos links para os hubs é o uso da variavel `src_fk`. Qua aqui possui esta notação de fk, justamente por seu papel de foreign key na modelagem dos links.
+
+O links também são incrementais, então o código para atribuir as variaveis funciona assim:
+
+``` sql
+{{ config(materialized='incremental') }}
+
+{% set source_model = "v_stg_orders" %}
+{% set src_pk = "ORDER_CUSTOMER_PK" %}
+{% set src_fk = ["CUSTOMER_PK", "ORDER_PK"] %}
+{% set src_ldts = "LOAD_DATE" %}
+{% set src_source = "RECORD_SOURCE" %}
+```
+
