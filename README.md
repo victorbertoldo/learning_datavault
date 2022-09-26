@@ -95,6 +95,9 @@ flowchart TD
     B[Hashed Staging Layer]-->C[Raw Data - dados existentes];
     B[Hashed Staging Layer]-->D[Hashes - Adição de colunas Metadados];
     B[Hashed Staging Layer]-->E[Constants - Adição de colunas Metadados];
+    C[Raw Data - dados existentes]-->F[Raw Vault];
+    D[Hashes - Adição de colunas Metadados]-->F[Raw Vault];
+    E[Constants - Adição de colunas Metadados]-->F[Raw Vault];
 ```    
 
 - **Raw Staging Layer** - A camada raw da stage geralmente é apenas uma view que pega os dados brutos da origem da forma que ele vem.
