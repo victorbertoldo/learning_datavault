@@ -27,6 +27,17 @@ hashed_columns:
             - CUSTOMER_MKTSEGMENT
             - CUSTOMER_COMMENT
             - EFFECTIVE_FROM
+    ORDER_HASHDIFF:
+        is_hashdiff: true
+        columns:
+            - 'ORDERKEY'
+            - 'CLERK'
+            - 'ORDERDATE'
+            - 'ORDERPRIORITY'
+            - 'ORDERSTATUS'
+            - 'ORDER_COMMENT'
+            - 'SHIPPRIORITY'
+            - 'TOTALPRICE'
 
 
 {% endset %}

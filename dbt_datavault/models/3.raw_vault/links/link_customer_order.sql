@@ -1,10 +1,19 @@
 {{ 
     config(
         materialized='incremental',
-        post_hook=['''ALTER TABLE {{ this }} DROP FOREIGN KEY ({{ (this.identifier).split("_")[1] }}_hk)''',
+        post_hook=['''ALTER TABLE {{ this }} 
+                        DROP FOREIGN KEY ({{ (this.identifier).split("_")[1] }}_hk)''',
         '''ALTER TABLE {{ this }} 
                     ADD FOREIGN KEY({{ (this.identifier).split("_")[1] }}_hk) 
                     REFERENCES {{ this.database }}.{{ this.schema }}.hub_{{ (this.identifier).split("_")[1] }} 
+                    MATCH FULL 
+                    ON UPDATE NO ACTION 
+                    ON DELETE NO ACTION''',
+                    '''ALTER TABLE {{ this }} 
+                        DROP FOREIGN KEY ({{ (this.identifier).split("_")[-1] }}_hk)''',
+        '''ALTER TABLE {{ this }} 
+                    ADD FOREIGN KEY({{ (this.identifier).split("_")[-1] }}_hk) 
+                    REFERENCES {{ this.database }}.{{ this.schema }}.hub_{{ (this.identifier).split("_")[-1] }} 
                     MATCH FULL 
                     ON UPDATE NO ACTION 
                     ON DELETE NO ACTION''']
