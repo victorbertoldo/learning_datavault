@@ -1,7 +1,9 @@
-{{ config(materialized='incremental') }}
+{{ config(materialized='incremental',
+            post_hook='ALTER TABLE {{ this }} ADD CONSTRAINT pk_{{ this.identifier }} PRIMARY KEY ({{ (this.identifier).split("_")[-1] }}_hk)'
+            ) }}
 
 {% set source_model = "v_stg_orders" %}
-{% set src_pk = "CUSTOMER_PK" %}
+{% set src_pk = "CUSTOMER_HK" %}
 {% set src_nk = "CUSTOMERKEY" %}
 {% set src_ldts = "LOAD_DATE" %}
 {% set src_source = "RECORD_SOURCE" %}
