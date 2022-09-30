@@ -269,3 +269,16 @@ O links também são incrementais, então o código para atribuir as variaveis f
 {% set src_source = "RECORD_SOURCE" %}
 ```
 
+
+
+
+
+Para criar a fk antes de rodar o modelo:
+``` sql
+ALTER TABLE dw.data_vault.sat_order_details 
+ADD FOREIGN KEY(order_hk) 
+REFERENCES dw.data_vault.hub_order 
+MATCH FULL 
+ON UPDATE NO ACTION 
+ON DELETE NO ACTION
+```

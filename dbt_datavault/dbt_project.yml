@@ -20,11 +20,12 @@ clean-targets:         # directories to be removed by `dbt clean`
 vars:
   load_date: '1992-01-08'
   tpch_size: 10 #1, 10, 100, 1000, 10000
+  re_data:save_test_history: true
 
 
 models:
   dbt_datavault:
-    raw_stage:
+    1.raw_stage:
       tags:
         - 'raw'
       +materialized: view
