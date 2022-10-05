@@ -1,5 +1,9 @@
 {{ config(materialized='incremental',
-            post_hook='ALTER TABLE {{ this }} ADD CONSTRAINT pk_{{ this.identifier }} PRIMARY KEY ({{ (this.identifier).split("_")[-1] }}_hk)'
+            post_hook=['''ALTER TABLE {{ this }} 
+                        DROP PRIMARY KEY''',
+                'ALTER TABLE {{ this }} ADD CONSTRAINT pk_{{ this.identifier }} PRIMARY KEY ({{ (this.identifier).split("_")[-1] }}_hk)'],
+            re_data_monitored=true,
+            re_data_time_filter='LOAD_DATE'
             ) }}
 
 
