@@ -7,7 +7,9 @@
                     REFERENCES {{ this.database }}.{{ this.schema }}.hub_customer 
                     MATCH FULL 
                     ON UPDATE NO ACTION 
-                    ON DELETE NO ACTION''']
+                    ON DELETE NO ACTION'''],
+            re_data_monitored=true,
+            re_data_time_filter='LOAD_DATE'
             ) }}
 
 {%- set yaml_metadata -%}
